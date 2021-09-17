@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="e66dc13d-f870-4cc3-8525-22376c4eaea3" name="abe.intiru.com" url="http://abe.intiru.com/login">
+        <fileTransfer host="ftp.intiru.com" port="21">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+      <webServer id="70ccc9ec-2bef-4b5e-bed1-e35ee19f8df3" name="api.intiru.com" url="http://ftp.intiru.com">
+        <fileTransfer host="ftp.intiru.com" port="21">
+          <advancedOptions>
+            <advancedOptions dataProtectionLevel="Private" passiveMode="true" shareSSLContext="true" />
+          </advancedOptions>
+        </fileTransfer>
+      </webServer>
+    </option>
+  </component>
+</project>
