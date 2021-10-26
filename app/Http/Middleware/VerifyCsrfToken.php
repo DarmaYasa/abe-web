@@ -12,7 +12,7 @@ class VerifyCsrfToken extends Middleware
      * @var array
      */
     protected $except = [
-        'http://abe.intiru.com/flashcard/create',
-        'http://abe.intiru.com/perbedaan/apicreate'
+        'flashcard/create',
+        'perbedaan/apicreate'
     ];
 }
