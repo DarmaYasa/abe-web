@@ -41,7 +41,7 @@
                         <img class="img-thumbnail" src="{{asset('UploadedFile/perbedaan/'.$datas->attachment2)}}" alt="Photo" width="100">
                     </td>
                     <td>
-                        {{$datas->pengguna->nama_user}}
+                        {{optional($datas->pengguna)->nama_user}}
                     </td>
                     <td>
                         <a href="#" id="{{$datas->id}}" class="btn bg-gradient-danger delete" data-action="{{asset('ajax/perbedaan/delete')}}">Hapus</a>

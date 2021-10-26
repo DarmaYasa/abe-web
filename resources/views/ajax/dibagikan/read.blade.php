@@ -90,7 +90,7 @@
                     </td>
 
                     <td>
-                        @if($datas->penerima->id_jenispengguna ==  2 && $datas->flashcard->status == 'invalid')
+                        @if(optional($datas->penerima)->id_jenispengguna ==  2 && $datas->flashcard->status == 'invalid')
                             <a href="#" id="{{$datas->flashcard->id}}" class="btn bg-gradient-success accept" data-action="{{asset('ajax/dibagikan/accept')}}">Validasi</a> |
                         @endif
                             <a href="#" id="{{$datas->id}}" class="btn bg-gradient-danger delete" data-action="{{asset('ajax/dibagikan/delete')}}">Hapus</a>

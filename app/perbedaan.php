@@ -14,7 +14,7 @@ class perbedaan extends Model
     protected $primaryKey = 'id';
     protected $dates = ['deleted_at'];
     function pengguna() {
-        return $this->belongsTo(pengguna::class, 'id_user', 'id');
+        return $this->belongsTo(pengguna::class, 'id_user', 'id')->withTrashed();
     }
 
 }
