@@ -6,6 +6,8 @@ use App\jenisflashcard;
 use App\flashcard;
 use App\pengguna;
 use App\auth;
+use App\notifikasi;
+use App\Services\SendOneSignalNotification;
 use Illuminate\Http\Request;
 
 class flashcards extends Controller
@@ -56,6 +58,17 @@ class flashcards extends Controller
         $flashcard->status = 'valid';
         $flashcard->id_user = $idpengguna;
         $flashcard->save();
+
+        $notifikasi = notifikasi::create([
+            'judul' => $flashcard->judul,
+            'deskripsi' => $flashcard->deskripsi,
+            'type' => 'Flashcard',
+            'dilihat' => 0,
+            'dibaca' => 0,
+        ]);
+
+        SendOneSignalNotification::send($notifikasi->judul, $notifikasi->deskripsi);
+
         echo "sukses";
     }
     public function ajaxdelete( $id)
@@ -124,6 +137,17 @@ class flashcards extends Controller
                 'message' => 'Data Berhasil Di tambahkan',
                 'data' => $user
             ];
+
+            $notifikasi = notifikasi::create([
+                'judul' => $flashcard->judul,
+                'deskripsi' => $flashcard->deskripsi,
+                'type' => 'Flashcard',
+                'dilihat' => 0,
+                'dibaca' => 0,
+            ]);
+
+            SendOneSignalNotification::send($notifikasi->judul, $notifikasi->deskripsi);
+
             return $data;
         }else{
             $data = [

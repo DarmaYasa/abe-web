@@ -3,8 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\auth;
+use App\notifikasi;
 use App\perbedaan;
 use App\pengguna;
+use App\Services\SendOneSignalNotification;
 use Illuminate\Http\Request;
 
 class perbedaans extends Controller
@@ -47,6 +49,17 @@ class perbedaans extends Controller
         $perbedaan->attachment2 = time().'_'.$gambar2->getClientOriginalName();
         $perbedaan->id_user = $idpengguna;
         $perbedaan->save();
+
+        $notifikasi = notifikasi::create([
+            'judul' => $perbedaan->judul,
+            'deskripsi' => $perbedaan->deskripsi,
+            'type' => 'Perbedaan',
+            'dilihat' => 0,
+            'dibaca' => 0,
+        ]);
+
+        SendOneSignalNotification::send($notifikasi->judul, $notifikasi->deskripsi);
+
         echo "sukses";
     }
     public function ajaxdelete( $id)
@@ -57,8 +70,8 @@ class perbedaans extends Controller
     }
     public function apicreate(Request $req)
     {
-        $validation = auth::where('id_user',$req->id_user)->count();
-        if ($validation >= 1){
+        $validation = auth::where('id_user',$req->id_user)->latest()->first();
+        if ($validation){
             $user = pengguna::where('id','=',$req->id_user)->first();
 
             $perbedaan = new perbedaan;
@@ -73,6 +86,17 @@ class perbedaans extends Controller
             $perbedaan->id_user = $req->id_user;
             $perbedaan->id_jenispengguna = $user['id_jenispengguna'];
             $perbedaan->save();
+
+            $notifikasi = notifikasi::create([
+                'judul' => $perbedaan->judul,
+                'deskripsi' => $perbedaan->deskripsi,
+                'type' => 'Perbedaan',
+                'dilihat' => 0,
+                'dibaca' => 0,
+            ]);
+
+            SendOneSignalNotification::send($notifikasi->judul, $notifikasi->deskripsi, $validation->id_device);
+
             $data = [
                 'status' => 'Success',
                 'message' => 'Data Berhasil Di tambahkan',
