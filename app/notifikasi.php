@@ -8,6 +8,6 @@ class notifikasi extends Model
 {
     protected $table = 'notifikasi';
 
-    protected $fillable = ['id','judul','deskripsi','dibaca','dilihat']; //whitelist == yang diperbolehkan
+    protected $fillable = ['id', 'judul', 'deskripsi', 'dibaca', 'dilihat', 'type']; //whitelist == yang diperbolehkan
     protected $primaryKey = 'id';
 }
